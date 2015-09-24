@@ -27,5 +27,5 @@
       "Softpampa\\Moip\\Subscription\\Test": "tests/"
     }
   },
-  "minimum-stability": "dev"
+  "minimum-stability": "dev-master"
 }
