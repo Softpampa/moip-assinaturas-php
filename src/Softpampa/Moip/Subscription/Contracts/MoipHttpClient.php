@@ -1,4 +1,4 @@
-<?php namespace Prettus\Moip\Subscription\Contracts;
+<?php namespace Softpampa\Moip\Subscription\Contracts;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface;
 
 /**
  * Interface MoipHttpClient
- * @package Prettus\Moip\Subscription\Contracts
+ * @package Softpampa\Moip\Subscription\Contracts
  */
 interface MoipHttpClient {
 

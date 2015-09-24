@@ -1,16 +1,16 @@
-<?php namespace Prettus\Moip\Subscription;
+<?php namespace Softpampa\Moip\Subscription;
 
-use Prettus\Moip\Subscription\Contracts\MoipHttpClient;
-use Prettus\Moip\Subscription\Resources\Customers;
-use Prettus\Moip\Subscription\Resources\Invoices;
-use Prettus\Moip\Subscription\Resources\Payments;
-use Prettus\Moip\Subscription\Resources\Plans;
-use Prettus\Moip\Subscription\Resources\Preferences;
-use Prettus\Moip\Subscription\Resources\Subscriptions;
+use Softpampa\Moip\Subscription\Contracts\MoipHttpClient;
+use Softpampa\Moip\Subscription\Resources\Customers;
+use Softpampa\Moip\Subscription\Resources\Invoices;
+use Softpampa\Moip\Subscription\Resources\Payments;
+use Softpampa\Moip\Subscription\Resources\Plans;
+use Softpampa\Moip\Subscription\Resources\Preferences;
+use Softpampa\Moip\Subscription\Resources\Subscriptions;
 
 /**
  * Class Api
- * @package Prettus\Moip\Subscription
+ * @package Softpampa\Moip\Subscription
  */
 class Api {
 

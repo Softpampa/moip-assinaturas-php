@@ -1,5 +1,5 @@
 {
-  "name": "prettus/moip-assinaturas-php",
+  "name": "softpampa/moip-assinaturas-php",
   "description": "Biblioteca simples de integração com a API de Assinatura da MoiP.",
   "license": "MIT",
   "keywords": ["moip", "assinaturas", "pagamentos", "subscriptions", "payments"],
@@ -7,6 +7,10 @@
     {
       "name": "Anderson Andrade",
       "email": "contato@andersonandra.de"
+    },
+    {
+      "name": "Madson Verdi Junior",
+      "email": "madson.verdi@softpampa.com"
     }
   ],
   "require": {
@@ -19,8 +23,8 @@
   },
   "autoload": {
     "psr-0": {
-      "Prettus\\Moip\\Subscription\\": "src/",
-      "Prettus\\Moip\\Subscription\\Test": "tests/"
+      "Softpampa\\Moip\\Subscription\\": "src/",
+      "Softpampa\\Moip\\Subscription\\Test": "tests/"
     }
   },
   "minimum-stability": "stable"

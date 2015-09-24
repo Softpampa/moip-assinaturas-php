@@ -1,8 +1,8 @@
-<?php namespace Prettus\Moip\Subscription;
+<?php namespace Softpampa\Moip\Subscription;
 
 /**
  * Class ResourceUtils
- * @package Prettus\Moip\Subscription
+ * @package Softpampa\Moip\Subscription
  */
 trait ResourceUtils {
 

@@ -1,20 +1,20 @@
-<?php namespace Prettus\Moip\Subscription\Resources;
+<?php namespace Softpampa\Moip\Subscription\Resources;
 
 use GuzzleHttp\Exception\ClientException;
-use Prettus\Moip\Subscription\Contracts\MoipHttpClient;
-use Prettus\Moip\Subscription\ResourceUtils;
+use Softpampa\Moip\Subscription\Contracts\MoipHttpClient;
+use Softpampa\Moip\Subscription\ResourceUtils;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class Subscriptions
- * @package Prettus\Moip\Subscription\Resources
+ * Class Plans
+ * @package Softpampa\Moip\Subscription\Resources
  */
-class Subscriptions {
+class Plans {
 
     use ResourceUtils;
 
     const BASE_PATH = "assinaturas/{version}/{resource}";
-    const RESOURCE  = "subscriptions";
+    const RESOURCE  = "plans";
 
     /**
      * @var MoipHttpClient
@@ -26,19 +26,18 @@ class Subscriptions {
     }
 
     /**
-     * Criar Assinatura
+     * Criar um plano
      *
      * @param array $data
-     * @param bool $new_customer
      * @param array $options
+     * @throws ClientException
      * @return ResponseInterface
      */
-    public function create(array $data, $new_customer = false, array $options = []){
+    public function create(array $data, array $options = []){
 
-        $url = $this->interpolate( self::BASE_PATH."?new_customer={new_customer}", [
-            'version'       => $this->client->getApiVersion(),
-            'resource'      => self::RESOURCE,
-            'new_customer'  => $new_customer === true ? 'true' : 'false'
+        $url = $this->interpolate( self::BASE_PATH, [
+            'version'   => $this->client->getApiVersion(),
+            'resource'  => self::RESOURCE
         ]);
 
         $options = array_merge($options,['body'=>json_encode($data)]);
@@ -47,7 +46,7 @@ class Subscriptions {
     }
 
     /**
-     * Listar todas assinaturas
+     * Listar todos os planos
      *
      * @param array $options
      * @throws ClientException
@@ -64,7 +63,7 @@ class Subscriptions {
     }
 
     /**
-     * Consultar detalhes de uma assinatura
+     * Consultar detalhes de um plano
      *
      * @param $code
      * @param array $options
@@ -83,7 +82,7 @@ class Subscriptions {
     }
 
     /**
-     * Alterar uma assinatura
+     * Alterar um plano
      *
      * @param $code
      * @param array $data
@@ -106,63 +105,31 @@ class Subscriptions {
     }
 
     /**
-     * Listar todas as faturas de uma assinatura
+     * Ativar um plano
      *
      * @param $code
      * @param array $options
      * @throws ClientException
      * @return ResponseInterface
      */
-    public function invoices($code, array $options = []){
-
-        $url = $this->interpolate( self::BASE_PATH."/{code}/invoices", [
-            'version'   => $this->client->getApiVersion(),
-            'resource'  => self::RESOURCE,
-            'code'      => $code
-        ]);
-
-        return $this->client->get($url, $options);
-
+    public function active($code, array $options = []){
+        return $this->toogleActive($code, "activate", $options);
     }
 
     /**
-     * Suspender uma Assinatura
+     * Desativar um plano
      *
      * @param $code
      * @param array $options
      * @throws ClientException
      * @return ResponseInterface
      */
-    public function suspend($code, array $options = []){
-        return $this->toogleStatus($code, "suspend", $options);
+    public function deactivate($code, array $options = []){
+        return $this->toogleActive($code, "inactivate", $options);
     }
 
     /**
-     * Reativar uma Assinatura
-     *
-     * @param $code
-     * @param array $options
-     * @throws ClientException
-     * @return ResponseInterface
-     */
-    public function activate($code, array $options = []){
-        return $this->toogleStatus($code, "activate", $options);
-    }
-
-    /**
-     * Cancelar uma Assinatura
-     *
-     * @param $code
-     * @param array $options
-     * @throws ClientException
-     * @return ResponseInterface
-     */
-    public function cancel($code, array $options = []){
-        return $this->toogleStatus($code, "cancel", $options);
-    }
-
-    /**
-     * Suspender, reativar e cancelar uma Assinatura
+     * Ativar ou desativar um plano
      *
      * @param $code
      * @param $status [activate, inactivate]
@@ -170,7 +137,7 @@ class Subscriptions {
      * @throws ClientException
      * @return ResponseInterface
      */
-    protected function toogleStatus($code, $status, array $options = []){
+    protected function toogleActive($code, $status, array $options = []){
 
         $url = $this->interpolate( self::BASE_PATH."/{code}/{status}", [
             'version'   => $this->client->getApiVersion(),

@@ -1,13 +1,13 @@
-<?php namespace Prettus\Moip\Subscription;
+<?php namespace Softpampa\Moip\Subscription;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use Psr\Http\Message\ResponseInterface;
-use Prettus\Moip\Subscription\Contracts\MoipHttpClient;
+use Softpampa\Moip\Subscription\Contracts\MoipHttpClient;
 
 /**
  * Class MoipClient
- * @package Prettus\Moip\Subscription
+ * @package Softpampa\Moip\Subscription
  */
 class MoipClient implements MoipHttpClient {
 
