@@ -1,4 +1,6 @@
-<?php namespace Softpampa\Moip\Subscription;
+<?php
+
+namespace Softpampa\Moip\Subscription;
 
 use Softpampa\Moip\Subscription\Contracts\MoipHttpClient;
 use Softpampa\Moip\Subscription\Resources\Customers;
@@ -9,11 +11,10 @@ use Softpampa\Moip\Subscription\Resources\Preferences;
 use Softpampa\Moip\Subscription\Resources\Subscriptions;
 
 /**
- * Class Api
- * @package Softpampa\Moip\Subscription
+ * Class Api.
  */
-class Api {
-
+class Api
+{
     /**
      * @var MoipHttpClient
      */
@@ -52,55 +53,62 @@ class Api {
     /**
      * @param MoipHttpClient $client
      */
-    public function __construct(MoipHttpClient $client){
-        $this->client           = $client;
-        $this->customers        = new Customers($this->client);
-        $this->invoices         = new Invoices($this->client);
-        $this->payments         = new Payments($this->client);
-        $this->plans            = new Plans($this->client);
-        $this->preferences      = new Preferences($this->client);
-        $this->subscriptions    = new Subscriptions($this->client);
+    public function __construct(MoipHttpClient $client)
+    {
+        $this->client = $client;
+        $this->customers = new Customers($this->client);
+        $this->invoices = new Invoices($this->client);
+        $this->payments = new Payments($this->client);
+        $this->plans = new Plans($this->client);
+        $this->preferences = new Preferences($this->client);
+        $this->subscriptions = new Subscriptions($this->client);
     }
 
     /**
      * @return Customers
      */
-    public function customers(){
+    public function customers()
+    {
         return $this->customers;
     }
 
     /**
      * @return Invoices
      */
-    public function invoices(){
+    public function invoices()
+    {
         return $this->invoices;
     }
 
     /**
      * @return Payments
      */
-    public function payments(){
+    public function payments()
+    {
         return $this->payments;
     }
 
     /**
      * @return Plans
      */
-    public function plans(){
+    public function plans()
+    {
         return $this->plans;
     }
 
     /**
      * @return Preferences
      */
-    public function preferences(){
+    public function preferences()
+    {
         return $this->preferences;
     }
 
     /**
      * @return Subscriptions
      */
-    public function subscriptions(){
+    public function subscriptions()
+    {
         return $this->subscriptions;
     }
 }

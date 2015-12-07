@@ -1,21 +1,23 @@
-<?php namespace Softpampa\Moip\Subscription;
+<?php
+
+namespace Softpampa\Moip\Subscription;
 
 /**
- * Class ResourceUtils
- * @package Softpampa\Moip\Subscription
+ * Class ResourceUtils.
  */
-trait ResourceUtils {
-
+trait ResourceUtils
+{
     /**
-     * Compiles a string with markup into an interpolation
+     * Compiles a string with markup into an interpolation.
      *
      * @param $content
      * @param array $data
+     *
      * @return mixed
      */
-    protected function interpolate($content, array $data = []){
-
-        foreach($data as $key=>$value){
+    protected function interpolate($content, array $data = [])
+    {
+        foreach ($data as $key => $value) {
             $content = str_replace('{'.$key.'}', $value, $content);
         }
 
