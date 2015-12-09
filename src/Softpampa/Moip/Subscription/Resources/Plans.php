@@ -40,6 +40,7 @@ class Plans
     public function create(array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . self::BASE_PATH, [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);
@@ -61,6 +62,7 @@ class Plans
     public function all(array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . self::BASE_PATH, [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);
@@ -81,6 +83,7 @@ class Plans
     public function find($code, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . self::BASE_PATH.'/{code}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -105,6 +108,7 @@ class Plans
     public function update($code, array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . self::BASE_PATH.'/{code}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -159,6 +163,7 @@ class Plans
     protected function toogleActive($code, $status, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . self::BASE_PATH.'/{code}/{status}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
