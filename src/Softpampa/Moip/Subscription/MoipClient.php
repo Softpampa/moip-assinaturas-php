@@ -127,6 +127,15 @@ class MoipClient implements MoipHttpClient
     }
 
     /**
+     * Retoran a URL da API
+     * @return string
+     */
+    public function getApiUrl()
+    {
+        return $this->apiUrl;
+    }
+
+    /**
      * Executa uma requisição do tipo GET.
      *
      * @param null  $url
