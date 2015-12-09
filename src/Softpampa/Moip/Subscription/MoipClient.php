@@ -110,7 +110,7 @@ class MoipClient implements MoipHttpClient
      * Retorna o ambiente atual
      * @return string
      */
-    public function getEnbironment()
+    public function getEnvironment()
     {
         return $this->environment;
     }
