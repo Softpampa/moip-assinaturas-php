@@ -158,6 +158,8 @@ class MoipClient implements MoipHttpClient
     {
         $response = $this->client->get($url, $this->getOptions($options));
 
+        \Log::info('get-response', ['response' => $response, 'options' => $this->getOptions($options)]);
+
         return $response->getBody()->getContents();
     }
 

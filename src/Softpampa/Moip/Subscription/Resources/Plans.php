@@ -89,8 +89,6 @@ class Plans
             'code' => $code,
         ]);
 
-        \Log::info('url-plan-find', ['url' => $url, 'client' => $this->client]);
-
         return $this->client->get($url, $options);
     }
 
