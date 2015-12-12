@@ -39,7 +39,7 @@ class Invoices
      */
     public function find($code, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -60,7 +60,7 @@ class Invoices
      */
     public function payments($code, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}/payments', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}/payments', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -81,7 +81,7 @@ class Invoices
      */
     public function retryPayment($code, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}/payments', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}/payments', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,

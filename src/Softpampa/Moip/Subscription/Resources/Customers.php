@@ -43,7 +43,7 @@ class Customers
      */
     public function create(array $data, $new_vault = false, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'?new_vault={new_vault}', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'?new_vault={new_vault}', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'new_vault' => $new_vault === true ? 'true' : 'false',
@@ -65,7 +65,7 @@ class Customers
      */
     public function all(array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH, [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH, [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);
@@ -85,7 +85,7 @@ class Customers
      */
     public function find($code, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -107,7 +107,7 @@ class Customers
      */
     public function update($code, array $data, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -129,7 +129,7 @@ class Customers
      */
     public function updateBillingInfo($code, array $data, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}/billing_infos', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}/billing_infos', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,

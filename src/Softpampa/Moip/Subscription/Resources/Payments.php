@@ -42,7 +42,7 @@ class Payments
      */
     public function find($code, array $options = [])
     {
-        $url = $this->interpolate(self::BASE_PATH.'/{code}', [
+        $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
