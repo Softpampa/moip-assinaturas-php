@@ -93,8 +93,12 @@ class Customers
             'resource' => self::RESOURCE,
             'code' => $code,
         ]);
-
-        return $this->client->get($url, $options);
+        try {
+            $find = $client->get('https://github.com/_abc_123_404');
+        } catch (ClientException $e) {
+            $find = [];
+        }
+        return $find;
     }
 
     /**
