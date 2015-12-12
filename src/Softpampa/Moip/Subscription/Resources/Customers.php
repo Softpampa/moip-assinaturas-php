@@ -94,10 +94,11 @@ class Customers
             'code' => $code,
         ]);
         try {
-            $find = $this->client->get('https://github.com/_abc_123_404');
+            $find = $this->client->get($url, $options);
         } catch (ClientException $e) {
             $find = [];
         }
+
         return $find;
     }
 
