@@ -44,6 +44,7 @@ class Customers
     public function create(array $data, $new_vault = false, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'?new_vault={new_vault}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'new_vault' => $new_vault === true ? 'true' : 'false',
@@ -66,6 +67,7 @@ class Customers
     public function all(array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH, [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);
@@ -86,6 +88,7 @@ class Customers
     public function find($code, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -108,6 +111,7 @@ class Customers
     public function update($code, array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -130,6 +134,7 @@ class Customers
     public function updateBillingInfo($code, array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}/billing_infos', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,

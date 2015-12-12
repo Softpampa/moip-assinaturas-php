@@ -40,6 +40,7 @@ class Preferences
     public function setPreferences(array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH, [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);
@@ -62,6 +63,7 @@ class Preferences
     public function setPreferencesRetry(array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH, [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);

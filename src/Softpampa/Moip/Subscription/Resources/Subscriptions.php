@@ -39,6 +39,7 @@ class Subscriptions
     public function create(array $data, $new_customer = false, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'?new_customer={new_customer}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'new_customer' => $new_customer === true ? 'true' : 'false',
@@ -61,6 +62,7 @@ class Subscriptions
     public function all(array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH, [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
         ]);
@@ -81,6 +83,7 @@ class Subscriptions
     public function find($code, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -103,6 +106,7 @@ class Subscriptions
     public function update($code, array $data, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -126,6 +130,7 @@ class Subscriptions
     public function invoices($code, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}/invoices', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
@@ -193,6 +198,7 @@ class Subscriptions
     protected function toogleStatus($code, $status, array $options = [])
     {
         $url = $this->interpolate($this->client->getApiUrl() . '/' . self::BASE_PATH.'/{code}/{status}', [
+            'environment' => $this->client->getEnvironment(),
             'version' => $this->client->getApiVersion(),
             'resource' => self::RESOURCE,
             'code' => $code,
