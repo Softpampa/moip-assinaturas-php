@@ -158,7 +158,7 @@ class MoipClient implements MoipHttpClient
     {
         $response = $this->client->get($url, $this->getOptions($options));
 
-        return $response;
+        return $response->getBody();
     }
 
     /**
@@ -175,7 +175,7 @@ class MoipClient implements MoipHttpClient
     {
         $response = $this->client->post($url, $this->getOptions($options));
 
-        return $response;
+        return $response->getBody();
     }
 
     /**
@@ -192,7 +192,7 @@ class MoipClient implements MoipHttpClient
     {
         $response = $this->client->put($url, $this->getOptions($options));
 
-        return $response;
+        return $response->getBody();
     }
 
     /**
@@ -209,7 +209,7 @@ class MoipClient implements MoipHttpClient
     {
         $response = $this->client->delete($url, $this->getOptions($options));
 
-        return $response;
+        return $response->getBody();
     }
 
     /**
