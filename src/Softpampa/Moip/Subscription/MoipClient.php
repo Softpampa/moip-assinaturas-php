@@ -192,7 +192,12 @@ class MoipClient implements MoipHttpClient
     {
         $response = $this->client->put($url, $this->getOptions($options));
 
-        return $response->getBody()->getContents();
+        if ($response and $response->getBody()) {
+            return $response->getBody()->getContents();
+        } else {
+            return json_encode('Nada retornado');
+        }
+
     }
 
     /**
