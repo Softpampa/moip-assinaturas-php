@@ -93,6 +93,7 @@ class Customers
             'resource' => self::RESOURCE,
             'code' => $code,
         ]);
+
         try {
             $find = $this->client->get($url, $options);
         } catch (ClientException $e) {

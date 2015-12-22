@@ -89,7 +89,13 @@ class Subscriptions
             'code' => $code,
         ]);
 
-        return $this->client->get($url, $options);
+        try {
+            $find = $this->client->get($url, $options);
+        } catch (ClientException $e) {
+            $find = [];
+        }
+
+        return $find;
     }
 
     /**
