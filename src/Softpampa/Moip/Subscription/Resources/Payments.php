@@ -36,8 +36,6 @@ class Payments
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function find($code, array $options = [])
@@ -49,12 +47,6 @@ class Payments
             'code' => $code,
         ]);
 
-        try {
-            $find = $this->client->get($url, $options);
-        } catch (ClientException $e) {
-            $find = [];
-        }
-
-        return $find;
+        return $this->client->get($url, $options);
     }
 }

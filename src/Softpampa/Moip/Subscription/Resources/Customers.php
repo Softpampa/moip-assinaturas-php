@@ -37,8 +37,6 @@ class Customers
      * @param bool  $new_vault
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function create(array $data, $new_vault = false, array $options = [])
@@ -60,8 +58,6 @@ class Customers
      *
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function all(array $options = [])
@@ -81,8 +77,6 @@ class Customers
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function find($code, array $options = [])
@@ -94,13 +88,7 @@ class Customers
             'code' => $code,
         ]);
 
-        try {
-            $find = $this->client->get($url, $options);
-        } catch (ClientException $e) {
-            $find = [];
-        }
-
-        return $find;
+        return $this->client->get($url, $options);
     }
 
     /**
@@ -109,8 +97,6 @@ class Customers
      * @param $code
      * @param array $data
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */
@@ -132,8 +118,6 @@ class Customers
      * @param $code
      * @param array $data
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */

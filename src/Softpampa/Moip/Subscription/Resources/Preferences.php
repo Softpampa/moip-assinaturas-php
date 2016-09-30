@@ -33,8 +33,6 @@ class Preferences
      * @param array $data
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function setPreferences(array $data, array $options = [])
@@ -55,8 +53,6 @@ class Preferences
      *
      * @param array $data
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */

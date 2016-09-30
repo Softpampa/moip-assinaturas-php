@@ -33,8 +33,6 @@ class Invoices
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function find($code, array $options = [])
@@ -46,13 +44,7 @@ class Invoices
             'code' => $code,
         ]);
 
-        try {
-            $find = $this->client->get($url, $options);
-        } catch (ClientException $e) {
-            $find = [];
-        }
-
-        return $find;
+        return $this->client->get($url, $options);
     }
 
     /**
@@ -60,8 +52,6 @@ class Invoices
      *
      * @param $code
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */
@@ -82,8 +72,6 @@ class Invoices
      *
      * @param $code
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */

@@ -22,6 +22,12 @@ class Subscriptions
      */
     protected $client;
 
+
+    /**
+     * Constructor.
+     *
+     * @param MoipHttpClient $client
+     */
     public function __construct(MoipHttpClient $client)
     {
         $this->client = $client;
@@ -55,8 +61,6 @@ class Subscriptions
      *
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function all(array $options = [])
@@ -76,8 +80,6 @@ class Subscriptions
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function find($code, array $options = [])
@@ -89,13 +91,7 @@ class Subscriptions
             'code' => $code,
         ]);
 
-        try {
-            $find = $this->client->get($url, $options);
-        } catch (ClientException $e) {
-            $find = [];
-        }
-
-        return $find;
+        return $this->client->get($url, $options);
     }
 
     /**
@@ -104,8 +100,6 @@ class Subscriptions
      * @param $code
      * @param array $data
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */
@@ -129,8 +123,6 @@ class Subscriptions
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function invoices($code, array $options = [])
@@ -151,8 +143,6 @@ class Subscriptions
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function suspend($code, array $options = [])
@@ -165,8 +155,6 @@ class Subscriptions
      *
      * @param $code
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */
@@ -181,8 +169,6 @@ class Subscriptions
      * @param $code
      * @param array $options
      *
-     * @throws ClientException
-     *
      * @return ResponseInterface
      */
     public function cancel($code, array $options = [])
@@ -196,8 +182,6 @@ class Subscriptions
      * @param $code
      * @param $status [activate, inactivate]
      * @param array $options
-     *
-     * @throws ClientException
      *
      * @return ResponseInterface
      */

@@ -51,6 +51,8 @@ class MoipClient implements MoipHttpClient
      */
     protected $apiUrl = 'https://{environment}.moip.com.br';
 
+    protected $response = [];
+
     protected $requestOptions = [];
 
     /**
@@ -66,13 +68,13 @@ class MoipClient implements MoipHttpClient
         $this->setEnvironment($environment);
 
         $base_uri = str_replace('{environment}', $this->environment, $this->apiUrl);
-        $this->client = new Client(['base_uri' => $base_uri]);
+        $this->client = new Client(['base_uri' => $base_uri, 'http_errors' => false]);
 
         $this->requestOptions = [
             'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Basic '.base64_encode("{$this->apiToken}:{$this->apiKey}"),
+                'Authorization' => 'Basic ' . base64_encode("{$this->apiToken}:{$this->apiKey}"),
             ],
         ];
     }
@@ -145,6 +147,51 @@ class MoipClient implements MoipHttpClient
     }
 
     /**
+     * Executa uma requisição.
+     *
+     * @param string $url
+     * @param array  $options
+     *
+     * @return void
+     */
+    protected function request($method, $url, $options = [])
+    {
+        $response = $this->client->request($method, $url, $this->getOptions($options));
+
+        $this->response['http_code'] = $response->getStatusCode();
+        $this->response['content'] = $response->getBody()->getContents();
+    }
+
+    /**
+     * Retorna resultados.
+     *
+     * @return void
+     */
+    public function results() {
+        return $this->response['content'];
+    }
+
+    /**
+     * Verifica se há erros.
+     *
+     * @return boolean
+     */
+    public function hasErrors()
+    {
+        return $this->response['http_code'] >= 400;
+    }
+
+    /**
+     * Retorna erros.
+     *
+     * @return array
+     */
+    public function errors()
+    {
+        return json_decode($this->response['content'])->errors;
+    }
+
+    /**
      * Executa uma requisição do tipo GET.
      *
      * @param null  $url
@@ -156,9 +203,9 @@ class MoipClient implements MoipHttpClient
      */
     public function get($url = null, $options = [])
     {
-        $response = $this->client->get($url, $this->getOptions($options));
+        $this->request('get', $url, $options);
 
-        return $response->getBody()->getContents();
+        return $this;
     }
 
     /**
@@ -173,9 +220,9 @@ class MoipClient implements MoipHttpClient
      */
     public function post($url = null, $options = [])
     {
-        $response = $this->client->post($url, $this->getOptions($options));
+        $this->request('post', $url, $options);
 
-        return $response->getBody()->getContents();
+        return $this;
     }
 
     /**
@@ -190,13 +237,9 @@ class MoipClient implements MoipHttpClient
      */
     public function put($url = null, $options = [])
     {
-        $response = $this->client->put($url, $this->getOptions($options));
+        $this->request('put', $url, $options);
 
-        if ($response and $response->getBody()) {
-            return $response->getBody()->getContents();
-        } else {
-            return json_encode('Nada retornado');
-        }
+        return $this;
 
     }
 
@@ -212,10 +255,11 @@ class MoipClient implements MoipHttpClient
      */
     public function delete($url = null, $options = [])
     {
-        $response = $this->client->delete($url, $this->getOptions($options));
+        $this->request('delete', $url, $options);
 
-        return $response->getBody()->getContents();
+        return $this;
     }
+
 
     /**
      * @param array $options
