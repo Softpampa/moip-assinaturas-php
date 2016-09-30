@@ -22,7 +22,6 @@ class Subscriptions
      */
     protected $client;
 
-
     /**
      * Constructor.
      *

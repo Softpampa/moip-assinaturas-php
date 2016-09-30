@@ -17,42 +17,38 @@ class MoipClient implements MoipHttpClient
     protected $client;
 
     /**
-     * Api Token.
-     *
-     * @var string
+     * @var string Api Token.
      */
     protected $apiToken;
 
     /**
-     * Api Key.
-     *
-     * @var string
+     * @var string Api Key.
      */
     protected $apiKey;
 
     /**
-     * Ambiente da API.
-     *
-     * @var string
+     * @var string Ambiente da API.
      */
     protected $environment = MoipHttpClient::SANDBOX;
 
     /**
-     * Versão da API.
-     *
-     * @var string
+     * @var string Versão da API.
      */
     protected $apiVersion = 'v1';
 
     /**
-     * Url da API.
-     *
-     * @var string
+     * @var string Url da API.
      */
     protected $apiUrl = 'https://{environment}.moip.com.br';
 
+    /**
+     * @var array Reposta da requisição.
+     */
     protected $response = [];
 
+    /**
+     * @var array Atributos da requisição.
+     */
     protected $requestOptions = [];
 
     /**
@@ -168,7 +164,7 @@ class MoipClient implements MoipHttpClient
      * @return void
      */
     public function results() {
-        return $this->response['content'];
+        return json_decode($this->response['content']);
     }
 
     /**
