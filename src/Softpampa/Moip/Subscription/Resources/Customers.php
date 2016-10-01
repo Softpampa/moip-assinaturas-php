@@ -88,7 +88,13 @@ class Customers
             'code' => $code,
         ]);
 
-        return $this->client->get($url, $options);
+        $response = $this->client->get($url, $options);
+
+        if (! $response->results()) {
+            $response->setError('MXC1', 'Código do cliente não encontrado');
+        }
+
+        return $response;
     }
 
     /**

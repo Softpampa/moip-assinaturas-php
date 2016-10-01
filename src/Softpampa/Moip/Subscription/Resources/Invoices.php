@@ -44,7 +44,13 @@ class Invoices
             'code' => $code,
         ]);
 
-        return $this->client->get($url, $options);
+        $response = $this->client->get($url, $options);
+
+        if (! $response->results()) {
+            $response->setError('MXC2', 'Fatura não encontrada');
+        }
+
+        return $response;
     }
 
     /**

@@ -83,7 +83,13 @@ class Plans
             'code' => $code,
         ]);
 
-        return $this->client->get($url, $options);
+        $response = $this->client->get($url, $options);
+
+        if (! $response->results()) {
+            $response->setError('MXC5', 'Plano não encontrado');
+        }
+
+        return $response;
     }
 
     /**

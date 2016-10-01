@@ -47,6 +47,11 @@ class MoipClient implements MoipHttpClient
     protected $response = [];
 
     /**
+     * @var array Errors.
+     */
+    protected $errors = [];
+
+    /**
      * @var array Atributos da requisição.
      */
     protected $requestOptions = [];
@@ -184,7 +189,44 @@ class MoipClient implements MoipHttpClient
      */
     public function errors()
     {
-        return json_decode($this->response['content'])->errors;
+        $this->findErrors();
+
+        return $this->errors;
+    }
+
+    /**
+     * Encontra erros.
+     *
+     * @return void
+     */
+    protected function findErrors()
+    {
+        $response = $this->response['content'];
+
+        if (isset($response['errors'])) {
+            $this->errors = json_decode($content)->errors;
+
+            return;
+        }
+
+        if (empty($this->errors)) {
+            $this->setError('MXX', 'Erro inesperado');
+        }
+    }
+
+    /**
+     * Adicionar um erro.
+     *
+     * @return void
+     */
+    public function setError($code, $message)
+    {
+        $error = [
+            'code' => $code,
+            'message' => $message
+        ];
+
+        $this->errors[] = (object) $error;
     }
 
     /**

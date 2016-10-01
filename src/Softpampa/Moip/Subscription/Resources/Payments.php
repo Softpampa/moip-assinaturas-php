@@ -47,6 +47,12 @@ class Payments
             'code' => $code,
         ]);
 
-        return $this->client->get($url, $options);
+        $response = $this->client->get($url, $options);
+
+        if (! $response->results()) {
+            $response->setError('MXC3', 'Pagamento não encontrado');
+        }
+
+        return $response;
     }
 }
