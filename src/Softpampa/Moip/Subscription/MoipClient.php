@@ -69,9 +69,10 @@ class MoipClient implements MoipHttpClient
         $this->setEnvironment($environment);
 
         $base_uri = str_replace('{environment}', $this->environment, $this->apiUrl);
-        $this->client = new Client(['base_uri' => $base_uri, 'http_errors' => false]);
+        $this->client = new Client(['base_uri' => $base_uri]);
 
         $this->requestOptions = [
+            'exceptions' => false,
             'headers' => [
                 'Accept' => 'application/json',
                 'Content-Type' => 'application/json',
@@ -157,7 +158,7 @@ class MoipClient implements MoipHttpClient
      */
     protected function request($method, $url, $options = [])
     {
-        $response = $this->client->request($method, $url, $this->getOptions($options));
+        $response = call_user_func_array([$this->client, $method], [$url, $this->getOptions($options)]);
 
         $this->response['http_code'] = $response->getStatusCode();
         $this->response['content'] = $response->getBody()->getContents();
