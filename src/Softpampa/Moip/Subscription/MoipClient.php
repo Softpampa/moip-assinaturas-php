@@ -202,10 +202,11 @@ class MoipClient implements MoipHttpClient
      */
     protected function findErrors()
     {
-        $response = $this->response['content'];
+        $this->errors = [];
+        $response = json_decode($this->response['content']);
 
-        if (isset($response['errors'])) {
-            $this->errors = json_decode($content)->errors;
+        if (property_exists($response, 'errors')) {
+            $this->errors = $response->errors;
 
             return;
         }
@@ -308,5 +309,15 @@ class MoipClient implements MoipHttpClient
     public function getOptions($options = [])
     {
         return array_merge($this->requestOptions, $options);
+    }
+
+    /**
+     * Get response
+     *
+     * @return array
+     */
+    public function getResponse()
+    {
+        return $this->response;
     }
 }
