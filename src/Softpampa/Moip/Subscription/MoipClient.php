@@ -161,7 +161,7 @@ class MoipClient implements MoipHttpClient
         $response = call_user_func_array([$this->client, $method], [$url, $this->getOptions($options)]);
 
         $this->response['http_code'] = $response->getStatusCode();
-        $this->response['content'] = $response->getBody()->getContents();
+        $this->response['content'] = (string) $response->getBody();
     }
 
     /**
@@ -205,7 +205,7 @@ class MoipClient implements MoipHttpClient
         $this->errors = [];
         $response = json_decode($this->response['content']);
 
-        if (property_exists($response, 'errors')) {
+        if (is_object($response) && property_exists($response, 'errors')) {
             $this->errors = $response->errors;
 
             return;
@@ -225,7 +225,7 @@ class MoipClient implements MoipHttpClient
     {
         $error = [
             'code' => $code,
-            'message' => $message
+            'description' => $message
         ];
 
         $this->errors[] = (object) $error;
